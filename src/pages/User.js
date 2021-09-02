@@ -13,7 +13,9 @@ const User = ({ history }) => {
     return (
         <div className="users">
             {
-                data.map(item => <span key={item.id}>{item.name}</span>)
+                data.map(item => <div key={item.id}>
+                    <span style={{padding:"20px"}}>ID: {item.id}</span>
+                    <span>{item.name}</span></div>)
             }
         </div>
     )

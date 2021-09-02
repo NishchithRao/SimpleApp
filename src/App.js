@@ -6,13 +6,19 @@ import actions from './store/actions';
 function App({history}) {
   const dispatch = useDispatch();
   const {loading,error} = useSelector(state => state);
-  const start = () => {
+  const start = (type) => {
     dispatch(actions.LOADING());
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(res => res.json())
     .then(data => {
-      dispatch(actions.SET_DATA(data));
       dispatch(actions.LOADING());
+      if(type==="even") {
+        data = data.filter(item => item.id%2===0);
+      }
+      else {
+        data = data.filter(item => item.id%2!==0);
+      }
+      dispatch(actions.SET_DATA(data));
       history.push("/users");
     })
     .catch(err => {
@@ -34,7 +40,8 @@ function App({history}) {
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={start}>Start</button>
+        <button onClick={() =>start("even")}>Even Users</button>
+        <button onClick={() => start("odd")}>Odd Users</button>
       </header>
     </div>
   );

@@ -17,6 +17,11 @@ const reducer = (state=appState,action) => {
                 ...state,
                 error: action.value
             }
+        case "TYPE":
+            return {
+                ...state,
+                type: action.value
+            }
         default:
             return {...state}
     }
