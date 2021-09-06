@@ -1,10 +1,13 @@
 .App {
   text-align: center;
 }
-.App button {
+.App button,a {
+  text-decoration: none;
+  color: white;
   margin-top: 100px;
   padding: 10px 20px;
-  background-color: pink;
+  background-color: black;
+  margin-inline: 20px;
   border: 1px solid rgba(0,0,0,0.2);
 }
 
@@ -21,4 +24,31 @@
 .users {
   display: flex;
   flex-direction: column;
+}
+ul {
+  display: grid;
+  grid-template-rows: repeat(auto,1fr);
+  gap: 20px;
+}
+li {
+  list-style: none;
+  display: block;
+  margin-block: 10px;
+  background-color: black;
+  color: white;
+  text-align: left;
+  padding: 20px;
+}
+li span {
+  display: block;
+}
+li span:last-child {
+  background-color: rgba(0,0,0,0.2);
+  padding: 10px;
+}
+h1 {
+  text-align: center;
+}
+.title {
+  font-weight: bold;
 }

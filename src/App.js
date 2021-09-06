@@ -1,25 +1,24 @@
 import './App.css';
 import { useSelector,useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import actions from './store/actions';
+import { Link } from 'react-router-dom';
 
 function App({history}) {
   const dispatch = useDispatch();
-  const {loading,error} = useSelector(state => state);
+  const {loading,error,evenData,oddData} = useSelector(state => state);
+
   const start = (type) => {
     dispatch(actions.LOADING());
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://jsonplaceholder.typicode.com/posts')
     .then(res => res.json())
     .then(data => {
       dispatch(actions.LOADING());
-      if(type==="even") {
-        data = data.filter(item => item.id%2===0);
-      }
-      else {
-        data = data.filter(item => item.id%2!==0);
-      }
-      dispatch(actions.SET_DATA(data));
-      history.push("/users");
+      console.log(data)
+      let currentEvenData = data.filter(item => item.userId%2===0);
+      let  currentOddData = data.filter(item => item.userId%2!==0);
+      dispatch(actions.SET_EVEN_DATA(currentEvenData));
+      dispatch(actions.SET_ODD_DATA(currentOddData));
     })
     .catch(err => {
       dispatch(actions.LOADING());
@@ -40,8 +39,14 @@ function App({history}) {
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={() =>start("even")}>Even Users</button>
-        <button onClick={() => start("odd")}>Odd Users</button>
+        <h1>API Fetch</h1>
+        {(!evenData[0] || !oddData[0]) && <button onClick={start}>Fetch</button>}
+        {(evenData[0] || oddData[0]) && 
+        <div className="links">
+        <Link to="/even">Even Users</Link>
+        <Link to="/odd">Odd Users</Link>
+        </div>
+        }
       </header>
     </div>
   );

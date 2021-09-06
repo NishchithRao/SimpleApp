@@ -1,5 +1,6 @@
 const appState = {
-    data:[],
+    evenData:[],
+    oddData:[],
     loading: false,
     error:''
 }
