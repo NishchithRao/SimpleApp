@@ -21,7 +21,7 @@ const EvenUser = ({ history }) => {
                     <Link to="/">Home</Link>
                     </div>
             }
-            {hasData &&<h1>Users</h1>}
+            {hasData &&<Link style={{marginInline:'auto',width:"fit-content"}} to="/even">Even Users</Link>}
             <ul>
             {
                 oddData.map(item => <li key={item.id}>
